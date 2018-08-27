@@ -1,18 +1,17 @@
 import axios from 'axios';
 
 
-const PENDINGFRIENDS = 'PENDINGFRIENDS';
-const SUCCESSFRIENDS = 'SUCCESSFRIENDS';
-const ERRORFRIENDS = 'ERRORFRIENDS';
+ export const PENDINGFRIENDS = 'PENDINGFRIENDS';
+ export const SUCCESSFRIENDS = 'SUCCESSFRIENDS';
+ export const ERRORFRIENDS = 'ERRORFRIENDS';
 
 
 export const friendsfetching = () => {
-    const promise = axios.get('http://localhost5000');
+    const promise = axios.get('http://localhost:5000/api/friends');
     return dispatch => {
         dispatch({type: PENDINGFRIENDS});
         promise.then(response => {
-            console.log(response)
-            dispatch({type: SUCCESSFRIENDS, payload: []})
+            dispatch({type: SUCCESSFRIENDS, payload: response.data})
         })
         .catch(err => {
             dispatch({type: ERRORFRIENDS, payload: "Failed to fetch friends"})
@@ -20,14 +19,25 @@ export const friendsfetching = () => {
     };
 };
 
-export const friendsSaving = () => {
+export const friendsSaving = (data) => {
+    const promise = axios.get('http://localhost:5000/api/friends',  data);
+    return dispatch => {
+        dispatch({type: PENDINGFRIENDS});
+        promise.then(response => {
+            dispatch({type: SUCCESSFRIENDS, payload: response.data})
+        })
+        .catch(err => {
+            dispatch({type: ERRORFRIENDS, payload: "Failed to add friend"})
+        })
+    };
+};
 
-}
 
-export const friendsDeleting = () => {
 
-}
+// export const friendsDeleting = () => {
 
-export const friendsUpdating = () => {
+// }
 
-}
+// export const friendsUpdating = () => {
+
+// }
