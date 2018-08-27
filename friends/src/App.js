@@ -7,7 +7,7 @@ import {friendsfetching, friendsSaving} from './Actions/index';
 
 class App extends Component {
     state = {
-      friend: ''
+      friends: []
     }
 
 
@@ -33,10 +33,10 @@ class App extends Component {
           })}
         </div>
         <div>
-          <input type= 'text' placeholder = 'Enter Friend' name= 'friend' value= {this.state.friend} onChange ={e => this.setState({ [e.target.name]: e.target.value})} />
+          <input type= 'text' placeholder = 'Enter Friend' name= 'friends' value= {this.state.friends} onChange ={e => this.setState({ [e.target.name]: e.target.value})} />
         </div>
-        <button onClick={() =>{ this.props.friendsSaving({friend: this.state.friend})
-         this.setState({friend: ''})} }>
+        <button onClick={() =>{ this.props.friendsSaving({name: this.state.friends})
+         this.setState({friends: ''})} }>
         Add Friend Here!
         </button>
       </div>

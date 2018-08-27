@@ -20,7 +20,8 @@ export const friendsfetching = () => {
 };
 
 export const friendsSaving = (data) => {
-    const promise = axios.get('http://localhost:5000/api/friends',  data);
+    console.log(` this is are data, ${data.friends}`);
+    const promise = axios.post('http://localhost:5000/api/friends',  data);
     return dispatch => {
         dispatch({type: PENDINGFRIENDS});
         promise.then(response => {
